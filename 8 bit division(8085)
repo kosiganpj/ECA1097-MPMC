@@ -1,0 +1,21 @@
+LHLD 2200H   
+LDA 2202H 
+MOV C, A
+LXI D, 0000H   
+BACK: MOV A, L
+SUB C        
+MOV L, A        
+JNC SKIP     
+DCR H  
+SKIP: INX D    
+MOV A, H
+CPI 00          
+JNZ BACK    
+MOV A, L
+CMP C         
+JNC BACK    
+SHLD 2202H  
+XCHG       
+SHLD 2203H 
+HLT            
+
