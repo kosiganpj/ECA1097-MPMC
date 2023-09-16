@@ -1,38 +1,7 @@
-LHLD 2200H    ; Get the dividend.
-
-LDA 2202H      ; Get the divisor.
-
-MOV C, A
-
-LXI D, 0000H   ; Quotient = 0
-
-BACK: MOV A, L
-
-SUB C              ; Subtract divisor.
-
-MOV L, A         ; Save partial result.
-
-JNC SKIP          ; if CY = 1 jump
-
-DCR H              ; Subtract borrow of previous subtraction.
-
-SKIP: INX D      ; Increment quotient.
-
-MOV A, H
-
-CPI 00              ; Check if dividend < divisor.
-
-JNZ BACK         ; if no repeat
-
-MOV A, L
-
-CMP C              ; Compare the contents of accumulator and register C. 
-JNC BACK        ; Jump to BACK if carry flag is not set. 
-SHLD 2202H    ; Store the remainder.
-
-XCHG               ; Exchange contents of DE and HL pair
-
-SHLD 2203H    ; Store the quotient
-
-HLT                  ; Terminate program execution
-
+LDA 2050
+SUI 30H
+CPI 0AH
+JC 200D
+SUI 07H
+STA 3050
+HLT
